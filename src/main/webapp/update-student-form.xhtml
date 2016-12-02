@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="resources/templates/template.xhtml">
+
+
+<h:head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<title>Update Student</title>
+	
+	<h:outputStylesheet library="css" name="style.css"  />
+	<h:outputStylesheet library="css" name="add-student-style.css"  />
+	
+</h:head>
+
+<h:body>
+<ui:define name="content">
+	<div id="wrapper">
+		<div id="header">
+			<h2>Princess University</h2>
+		</div>
+	</div>
+	
+	<div id="container">
+		<h3>Update Student</h3>
+
+		<h:messages globalOnly="true" />
+
+		<h:form id="form" style="margin-top: 10px;" >
+			<h:panelGrid columns="3">
+			
+				<h:outputLabel>Prenom:</h:outputLabel> <h:inputText value="#{student.firstName}" id="firstName" label="firstName" validatorMessage="Votre prenom n'est pas valide!" ><f:validateRegex pattern="[a-zA-Z]{1,20}"/></h:inputText> <h:message for="firstName" />
+	
+				<h:outputLabel>Nom:</h:outputLabel> <h:inputText value="#{student.lastName}" id="lastName" label="lastName" validatorMessage="Votre nom n'est pas valide!"><f:validateRegex pattern="[a-zA-Z]{1,20}"/></h:inputText> <h:message for="lastName" />
+				<h:outputLabel>Numero de telephone:</h:outputLabel> <h:inputText value="#{student.telephone}" id="telephone" label="telephone" validatorMessage="Votre telephone n'est pas valide!"><f:validateLongRange  minimum="100" maximum="9999999999"/></h:inputText> <h:message for="telephone" />
+	
+				<h:outputLabel>Email:</h:outputLabel> <h:inputText value="#{student.email}" id="email" 
+									required="true"
+            							requiredMessage="Your email is mandatory." label="email" validatorMessage="Votre email n'est pas valide!" ><f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]"/></h:inputText> 	<h:message for="email"  />
+				
+				 <h:inputHidden value="#{student.id}" />
+				
+				 <h:commandButton value="Enregistrer" styleClass="save" action="#{studentController.updateStudent(student)}"/>
+			
+			</h:panelGrid>
+		</h:form>
+
+		<div style="clear: both;"></div>
+
+		<p><h:outputLink value="list-students.xhtml">Back to List</h:outputLink></p>
+
+	</div>
+	</ui:define>
+</h:body>
+</ui:composition>
